@@ -1,0 +1,25 @@
+# Xcode generated project and user state
+PindouApp/PindouApp.xcodeproj/
+**/*.xcworkspace/xcuserdata/
+**/*.xcodeproj/xcuserdata/
+**/xcuserdata/
+
+# Build output
+DerivedData/
+PindouApp/.build/
+PindouApp/build/
+*.xcresult
+
+# macOS / Windows editor noise
+.DS_Store
+Thumbs.db
+.vs/
+.vscode/
+
+# Signing material must never enter source control
+*.p12
+*.mobileprovision
+*.cer
+*.key
+AuthKey_*.p8
+

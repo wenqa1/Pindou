@@ -1,0 +1,71 @@
+name: PindouApp
+
+options:
+  createIntermediateGroups: true
+  deploymentTarget:
+    iOS: "16.0"
+  groupSortPosition: top
+
+configs:
+  Debug: debug
+  Test: debug
+  Release: release
+
+configFiles:
+  Debug: Configurations/Debug.xcconfig
+  Test: Configurations/Test.xcconfig
+  Release: Configurations/Release.xcconfig
+
+targets:
+  PindouApp:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+      - path: Features
+      - path: Platform
+      - path: Shared
+      - path: Packages
+    settings:
+      base:
+        PRODUCT_NAME: 豆图
+        PRODUCT_MODULE_NAME: PindouApp
+        PRODUCT_BUNDLE_IDENTIFIER: "$(PINDOU_BUNDLE_ID)"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: 豆图
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.graphics-design
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SUPPORTS_MACCATALYST: NO
+        MARKETING_VERSION: 0.1.0
+        CURRENT_PROJECT_VERSION: 1
+        VERSIONING_SYSTEM: apple-generic
+
+  PindouAppUnitTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests/Unit
+    dependencies:
+      - target: PindouApp
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: "$(PINDOU_BUNDLE_ID).tests"
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  PindouApp:
+    build:
+      targets:
+        PindouApp: all
+    run:
+      config: Debug
+    test:
+      config: Test
+      gatherCoverageData: true
+      targets:
+        - name: PindouAppUnitTests
+          parallelizable: true
+    archive:
+      config: Release
