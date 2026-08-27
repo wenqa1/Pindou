@@ -106,6 +106,7 @@ Windows 可选安装 Swift for Windows + Visual Studio C++ Build Tools，用于�
 - Git 文本统一为 LF，文件名大小写与 import 完全一致。
 - 生成的 Xcode 工程、DerivedData、证书、profiles、API 私钥不进入仓库。
 - iOS 16 页面状态使用兼容方案；Observation 的 `@Observable` 属于更高系统版本。
+- 构建产物名固定为 `PindouApp`，显示名称通过 `CFBundleDisplayName=豆图` 设置；两者分离可避免 XCTest 的 `TEST_HOST` 路径与产物不一致。
 - Codemagic `xcode: latest` 适合首次跑通；首次绿色构建后记录实际 Xcode 版本并改为固定版本，减少云端镜像升级造成的变化。
 - 每次 IPA 使用 `PROJECT_BUILD_NUMBER` 更新 build number，避免重复上传版本。
 - Codemagic 承担本地 Mac 的编译签名环节，摄像头、色彩、热状态、内存和 iPad 交互仍以真实设备为验收依据。

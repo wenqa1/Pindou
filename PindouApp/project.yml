@@ -28,7 +28,7 @@ targets:
       - path: Packages
     settings:
       base:
-        PRODUCT_NAME: 豆图
+        PRODUCT_NAME: PindouApp
         PRODUCT_MODULE_NAME: PindouApp
         PRODUCT_BUNDLE_IDENTIFIER: "$(PINDOU_BUNDLE_ID)"
         GENERATE_INFOPLIST_FILE: YES
