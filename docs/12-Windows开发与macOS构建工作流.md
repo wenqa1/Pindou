@@ -37,7 +37,7 @@ iPhone / iPad
 
 | Workflow ID | 触发 | 签名 | 产物/目的 |
 |---|---|---|---|
-| `ios-validation` | push、pull request | 无 | XcodeGen、模拟器编译、XCTest |
+| `ios-validation` | `main` 的 push 或手动运行 | 无 | XcodeGen、模拟器编译、XCTest |
 | `ios-ipa-adhoc` | Codemagic 手动运行 | Ad Hoc | 可安装到已登记 UDID 的 IPA |
 | `ios-testflight` | Codemagic 手动运行 | App Store | IPA artifact，并上传 App Store Connect |
 
@@ -96,7 +96,7 @@ Windows 可选安装 Swift for Windows + Visual Studio C++ Build Tools，用于�
 1. Windows 编写测试、源码、资源和文档。
 2. 运行 `validate-windows.ps1`。
 3. Commit 并 push 到 GitHub。
-4. Codemagic 自动运行 `ios-validation`。
+4. 在一个完整大项完成时手动运行 `ios-validation`；合并到 `main` 后也会自动运行。
 5. 根据 Codemagic 的 Xcode 日志修复编译或测试问题。
 6. 需要安装包时手动选择 `ios-ipa-adhoc` 或 `ios-testflight`。
 7. 在实际 iPhone/iPad 验证相册、Share Extension、Core Data、Vision、横竖屏、Split View、大画布性能和内存压力。
