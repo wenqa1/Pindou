@@ -5,9 +5,9 @@ import Foundation
 final class PindouPersistenceController {
     let container: NSPersistentContainer
 
-    init(inMemory: Bool = false) {
+    init(storeName: String = "PindouApp", inMemory: Bool = false) {
         container = NSPersistentContainer(
-            name: "PindouApp",
+            name: storeName,
             managedObjectModel: Self.managedObjectModel
         )
 
@@ -16,7 +16,7 @@ final class PindouPersistenceController {
             description.type = NSInMemoryStoreType
         } else {
             description.type = NSSQLiteStoreType
-            description.url = Self.storeURL
+            description.url = Self.storeURL(named: storeName)
         }
         description.shouldMigrateStoreAutomatically = true
         description.shouldInferMappingModelAutomatically = true
@@ -31,12 +31,12 @@ final class PindouPersistenceController {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
 
-    private static var storeURL: URL {
+    private static func storeURL(named storeName: String) -> URL {
         let directory = FileManager.default.urls(
             for: .applicationSupportDirectory,
             in: .userDomainMask
         )[0]
-        return directory.appendingPathComponent("PindouApp.sqlite")
+        return directory.appendingPathComponent("\(storeName).sqlite")
     }
 
     private static var managedObjectModel: NSManagedObjectModel {

@@ -175,7 +175,7 @@ final class InventoryDashboardModel: ObservableObject {
         case .duplicateIdempotencyKey:
             return "此操作已提交，请勿重复出入库。"
         case let .insufficientAvailable(requested, available):
-            return "可用库存仅 (available) 颗，无法出库 (requested) 颗。"
+            return "可用库存仅 \(available) 颗，无法出库 \(requested) 颗。"
         default:
             return "库存操作未保存，请重试。"
         }

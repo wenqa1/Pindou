@@ -1,0 +1,68 @@
+name: BeanWarehouseApp
+
+options:
+  createIntermediateGroups: true
+  deploymentTarget:
+    iOS: "16.0"
+
+configs:
+  Debug: debug
+  Test: debug
+  Release: release
+
+configFiles:
+  Debug: Configurations/Debug.xcconfig
+  Test: Configurations/Test.xcconfig
+  Release: Configurations/Release.xcconfig
+
+targets:
+  BeanWarehouseApp:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+      - path: ../PindouApp/Features/Inventory
+      - path: ../PindouApp/Platform/Persistence
+    settings:
+      base:
+        PRODUCT_NAME: BeanWarehouseApp
+        PRODUCT_MODULE_NAME: BeanWarehouseApp
+        PRODUCT_BUNDLE_IDENTIFIER: "$(BEAN_WAREHOUSE_BUNDLE_ID)"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: 豆仓
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.productivity
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SUPPORTS_MACCATALYST: NO
+        MARKETING_VERSION: 0.1.0
+        CURRENT_PROJECT_VERSION: 1
+        VERSIONING_SYSTEM: apple-generic
+
+  BeanWarehouseAppUnitTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests/Unit
+    dependencies:
+      - target: BeanWarehouseApp
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: "$(BEAN_WAREHOUSE_BUNDLE_ID).tests"
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  BeanWarehouseApp:
+    build:
+      targets:
+        BeanWarehouseApp: all
+    run:
+      config: Debug
+    test:
+      config: Test
+      gatherCoverageData: true
+      targets:
+        - name: BeanWarehouseAppUnitTests
+          parallelizable: true
+    archive:
+      config: Release

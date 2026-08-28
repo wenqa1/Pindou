@@ -16,6 +16,11 @@
 10. [在线图纸库接口契约](docs/10-在线图纸库接口契约.md)
 11. [项目目录与架构树](docs/11-项目目录与架构树.md)
 12. [Windows 开发与 Codemagic 构建工作流](docs/12-Windows开发与macOS构建工作流.md)
+13. [开发完成日志](docs/13-开发完成日志.md)
+
+## 独立豆仓产品
+
+库存管理将作为可单独交付的产品维护：[`BeanWarehouse/README.md`](BeanWarehouse/README.md) 定义跨端账本契约；`BeanWarehouseiOS/` 是 iOS/iPadOS 16+ 独立 IPA 工程，`BeanWarehouseNAS/` 是可部署至飞牛 OS 的 Docker Compose Web 应用。两端各自保存 SQLite 数据，第一版不直接共用数据库文件，也不自动同步。
 
 ## 产品一句话定位
 
@@ -36,3 +41,4 @@
 | 0.2 | 2026-08-27 | 增加项目目录骨架与总体架构树 |
 | 0.3 | 2026-08-27 | 增加 Windows 主开发、macOS 构建工作流和 AppShell |
 | 0.4 | 2026-08-27 | 构建出口调整为 Codemagic，增加 Ad Hoc/TestFlight IPA 工作流 |
+| 0.5 | 2026-08-28 | 增加独立豆仓 iOS/飞牛 OS 应用骨架与跨端账本契约 |

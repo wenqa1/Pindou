@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f8f7ff">
+    <title>豆仓</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">本地豆量管理</p>
+          <h1>豆仓</h1>
+          <p class="subtitle">数据只保存到这台飞牛 NAS 的挂载目录。</p>
+        </div>
+        <button id="refresh-button" class="secondary-button">刷新</button>
+      </header>
+
+      <section id="summary" class="summary" aria-label="库存摘要"></section>
+
+      <section class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">新增流水</p>
+            <h2>入库或出库</h2>
+          </div>
+          <p id="form-message" class="form-message" role="status"></p>
+        </div>
+        <form id="movement-form" class="movement-form">
+          <label>品牌<input name="brandID" required maxlength="80" placeholder="例如 Perler"></label>
+          <label>系列<input name="seriesID" required maxlength="80" placeholder="例如 Standard"></label>
+          <label>色号<input name="colorCode" required maxlength="80" placeholder="例如 F22"></label>
+          <label>操作<select name="kind"><option value="inbound">入库</option><option value="outbound">出库</option></select></label>
+          <label>数量<input name="quantity" required inputmode="numeric" pattern="[0-9]*" placeholder="颗数"></label>
+          <button class="primary-button" type="submit">保存流水</button>
+        </form>
+      </section>
+
+      <section class="panel settings-panel">
+        <div>
+          <p class="eyebrow">补货提醒</p>
+          <h2>低库存阈值</h2>
+        </div>
+        <form id="threshold-form">
+          <label>少于<input id="threshold-input" name="lowStockThreshold" inputmode="numeric" pattern="[0-9]*" required> 颗时提醒</label>
+          <button class="secondary-button" type="submit">保存阈值</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="section-heading">
+          <div><p class="eyebrow">库存色号</p><h2>可用豆量</h2></div>
+          <p id="inventory-message" class="form-message" role="status"></p>
+        </div>
+        <div id="inventory-list" class="inventory-list"></div>
+      </section>
+
+      <section class="panel">
+        <div class="section-heading"><div><p class="eyebrow">最近记录</p><h2>库存流水</h2></div></div>
+        <div id="movement-list" class="movement-list"></div>
+      </section>
+    </main>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
