@@ -24,6 +24,29 @@ enum StockMovementKind: Sendable, Equatable {
     case outboundReversal
     case inboundReversal
 
+    var rawCode: String {
+        switch self {
+        case .inbound: return "inbound"
+        case .outbound: return "outbound"
+        case .stocktakeIncrease: return "stocktakeIncrease"
+        case .stocktakeDecrease: return "stocktakeDecrease"
+        case .outboundReversal: return "outboundReversal"
+        case .inboundReversal: return "inboundReversal"
+        }
+    }
+
+    init?(rawCode: String) {
+        switch rawCode {
+        case "inbound": self = .inbound
+        case "outbound": self = .outbound
+        case "stocktakeIncrease": self = .stocktakeIncrease
+        case "stocktakeDecrease": self = .stocktakeDecrease
+        case "outboundReversal": self = .outboundReversal
+        case "inboundReversal": self = .inboundReversal
+        default: return nil
+        }
+    }
+
     fileprivate var direction: Int64 {
         switch self {
         case .inbound, .stocktakeIncrease, .outboundReversal:
@@ -158,6 +181,7 @@ enum InventoryLedgerError: Error, Equatable {
     case receivedQuantityExceedsOrdered(received: Int64, ordered: Int64)
     case duplicateMovementID(UUID)
     case duplicateIdempotencyKey(String)
+    case insufficientAvailable(requested: Int64, available: Int64)
     case quantityOverflow
 }
 

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct RootView: View {
     @State private var selection: AppSection? = .inventory
+    @ObservedObject var inventoryDashboardModel: InventoryDashboardModel
 
     var body: some View {
         NavigationSplitView {
@@ -12,7 +13,12 @@ struct RootView: View {
             .navigationTitle("豆图")
         } detail: {
             if let selection {
-                FeaturePlaceholderView(section: selection)
+                switch selection {
+                case .inventory:
+                    InventoryDashboardView(model: inventoryDashboardModel)
+                default:
+                    FeaturePlaceholderView(section: selection)
+                }
             } else {
                 PlaceholderView(
                     title: "选择功能",
